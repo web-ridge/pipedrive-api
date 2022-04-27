@@ -60,7 +60,7 @@ type ProductsResponse struct {
 // ProductResponse represents single product response.
 type ProductResponse struct {
 	Success        bool           `json:"success"`
-	Data           []Product      `json:"data"`
+	Data           Product      `json:"data"`
 	AdditionalData AdditionalData `json:"additional_data,omitempty"`
 }
 
