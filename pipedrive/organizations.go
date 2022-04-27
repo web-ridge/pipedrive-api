@@ -92,6 +92,28 @@ type OrganizationResponse struct {
 	AdditionalData AdditionalData `json:"additional_data,omitempty"`
 }
 
+// Get details of a organizatoin
+//
+// Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/Organizations#getOrganization
+func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*OrganizationResponse, *Response, error) {
+	uri := fmt.Sprintf("/organization/%v", id)
+	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var record *OrganizationResponse
+
+	resp, err := s.client.Do(ctx, req, &record)
+
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return record, resp, nil
+}
+
 // List all organizations.
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Organizations/get_organizations
