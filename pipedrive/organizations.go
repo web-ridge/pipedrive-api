@@ -96,7 +96,7 @@ type OrganizationResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/Organizations#getOrganization
 func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*OrganizationResponse, *Response, error) {
-	uri := fmt.Sprintf("/organization/%v", id)
+	uri := fmt.Sprintf("/organizations/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
 
 	if err != nil {
