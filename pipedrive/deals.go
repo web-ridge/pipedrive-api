@@ -189,7 +189,7 @@ func (s *DealService) Find(ctx context.Context, term string) (*DealsResponse, *R
 // Get details of a deal
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/Deals#getDeal
-func (s *DealService) Details(ctx context.Context, id int) (*DealResponse, *Response, error) {
+func (s *DealService) GetByID(ctx context.Context, id int) (*DealResponse, *Response, error) {
 	uri := fmt.Sprintf("/deals/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
 
