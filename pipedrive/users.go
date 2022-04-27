@@ -229,7 +229,7 @@ func (s *UsersService) GetCurrentUserData(ctx context.Context) (*UserSingleRespo
 // GetByID returns specific user.
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/get_users_id
-func (s *UsersService) GetByID(ctx context.Context, id int) (*UserFollowersResponse, *Response, error) {
+func (s *UsersService) GetByID(ctx context.Context, id int) (*UserSingleResponse, *Response, error) {
 	uri := fmt.Sprintf("/users/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
 
@@ -237,7 +237,7 @@ func (s *UsersService) GetByID(ctx context.Context, id int) (*UserFollowersRespo
 		return nil, nil, err
 	}
 
-	var record *UserFollowersResponse
+	var record *UserSingleResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
 
