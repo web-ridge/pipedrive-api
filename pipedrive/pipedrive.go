@@ -91,7 +91,7 @@ type Config struct {
 type Rate struct {
 	Limit     int       `json:"limit"`
 	Remaining int       `json:"remaining"`
-	Reset     string `json:"reset"`
+	Reset     Timestamp `json:"reset"`
 }
 
 func (r Rate) String() string {
@@ -130,7 +130,6 @@ func (c *Client) NewRequest(method, url string, opt interface{}, body interface{
 	}
 
 	u, err := c.createRequestUrl(url, opt)
-
 	if err != nil {
 		return nil, err
 	}
@@ -142,14 +141,12 @@ func (c *Client) NewRequest(method, url string, opt interface{}, body interface{
 		enc := json.NewEncoder(buf)
 		enc.SetEscapeHTML(false)
 		err := enc.Encode(body)
-
 		if err != nil {
 			return nil, err
 		}
 	}
 
 	request, err := http.NewRequest(method, u, buf)
-
 	if err != nil {
 		return nil, err
 	}
@@ -221,7 +218,6 @@ func (c *Client) Do(ctx context.Context, request *http.Request, v interface{}) (
 	}
 
 	resp, err := c.client.Do(request)
-
 	if err != nil {
 		select {
 		case <-ctx.Done():
@@ -260,7 +256,6 @@ func (c *Client) Do(ctx context.Context, request *http.Request, v interface{}) (
 
 func (c *Client) createRequestUrl(path string, opt interface{}) (string, error) {
 	uri, err := c.BaseURL.Parse(hostProtocol + "://" + defaultBaseUrl + "v" + libraryVersion)
-
 	if err != nil {
 		return path, err
 	}
@@ -279,7 +274,6 @@ func (c *Client) createRequestUrl(path string, opt interface{}) (string, error) 
 	}
 
 	qs, err := query.Values(opt)
-
 	if err != nil {
 		return path, err
 	}
