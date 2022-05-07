@@ -243,13 +243,11 @@ func (s *OrganizationsService) Create(ctx context.Context, opt *OrganizationCrea
 		OwnerID   uint      `json:"owner_id"`
 		Label     uint      `json:"label"`
 		VisibleTo VisibleTo `json:"visible_to"`
-		AddTime   string    `json:"add_time"`
 	}{
 		opt.Name,
 		opt.OwnerID,
 		opt.Label,
 		opt.VisibleTo,
-		opt.AddTime.FormatFull(),
 	})
 	if err != nil {
 		return nil, nil, err

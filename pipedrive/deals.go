@@ -406,10 +406,8 @@ func (s *DealService) Create(ctx context.Context, opt *DealCreateOptions) (*Deal
 		Status              string    `json:"status"`
 		Probability         uint      `json:"probability"`
 		LostReason          string    `json:"lost_reason"`
-		AddTime             string    `json:"add_time"`
 		VisibleTo           VisibleTo `json:"visible_to"`
 		RequirementAnalysis string    `json:"56d3d40c37c0db60fff576ae73ba2fea0d58dc09"`
-		WantedStartTime     string    `json:"a3114acce61bb930180af173b395d76f42af8794"`
 		TemporaryLink       string    `json:"4fe88fad67d8dcbc17d18d9ee1faac55122249fd,omitempty"`
 		LeadSource          uint      `json:"5d4fbabc9b032aeb3df515d9c66994d6892ee062,omitempty"`
 	}{
@@ -423,10 +421,8 @@ func (s *DealService) Create(ctx context.Context, opt *DealCreateOptions) (*Deal
 		opt.Status,
 		opt.Probability,
 		opt.LostReason,
-		opt.AddTime.FormatFull(),
 		opt.VisibleTo,
 		opt.RequirementAnalysis,
-		opt.WantedStartTime.Format(),
 		opt.TemporaryLink,
 		opt.LeadSource,
 	})

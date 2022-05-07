@@ -178,7 +178,6 @@ func (s *PersonsService) Create(ctx context.Context, opt *PersonCreateOptions) (
 		Phone     string    `json:"phone"`
 		Label     uint      `json:"label"`
 		VisibleTo VisibleTo `json:"visible_to"`
-		AddTime   string    `json:"add_time"`
 	}{
 		opt.Name,
 		opt.OwnerID,
@@ -187,7 +186,6 @@ func (s *PersonsService) Create(ctx context.Context, opt *PersonCreateOptions) (
 		opt.Phone,
 		opt.Label,
 		opt.VisibleTo,
-		opt.AddTime.FormatFull(),
 	})
 	if err != nil {
 		return nil, nil, err
