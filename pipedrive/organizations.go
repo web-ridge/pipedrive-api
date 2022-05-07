@@ -98,7 +98,6 @@ type OrganizationResponse struct {
 func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*OrganizationResponse, *Response, error) {
 	uri := fmt.Sprintf("/organizations/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -106,7 +105,6 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*Organizati
 	var record *OrganizationResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -119,7 +117,6 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*Organizati
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Organizations/get_organizations
 func (s *OrganizationsService) List(ctx context.Context) (*OrganizationsResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodGet, "/organizations", nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -127,7 +124,6 @@ func (s *OrganizationsService) List(ctx context.Context) (*OrganizationsResponse
 	var record *OrganizationsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -151,14 +147,12 @@ type OrganizationUpdateOptions struct {
 func (s *OrganizationsService) Update(ctx context.Context, id int, opt *OrganizationUpdateOptions) (*OrganizationResponse, *Response, error) {
 	uri := fmt.Sprintf("/organizations/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
 
 	var record *OrganizationResponse
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -176,7 +170,6 @@ func (s *OrganizationsService) Merge(ctx context.Context, id int, mergeWithID in
 	}{
 		mergeWithID,
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -184,7 +177,6 @@ func (s *OrganizationsService) Merge(ctx context.Context, id int, mergeWithID in
 	var record *OrganizationResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -198,7 +190,6 @@ func (s *OrganizationsService) Merge(ctx context.Context, id int, mergeWithID in
 func (s *OrganizationsService) DeleteFollower(ctx context.Context, id int, followerID int) (*Response, error) {
 	uri := fmt.Sprintf("/organizations/%v/followers/%v", id, followerID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -212,7 +203,6 @@ func (s *OrganizationsService) DeleteFollower(ctx context.Context, id int, follo
 func (s *OrganizationsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/organizations/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -227,7 +217,6 @@ func (s *OrganizationsService) DeleteMultiple(ctx context.Context, ids []int) (*
 	req, err := s.client.NewRequest(http.MethodDelete, "/organizations", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -241,7 +230,7 @@ type OrganizationCreateOptions struct {
 	Name      string    `json:"name"`
 	OwnerID   uint      `json:"owner_id"`
 	VisibleTo VisibleTo `json:"visible_to"`
-	AddTime   Timestamp `json:"add_time"`
+	AddTime   string    `json:"add_time"`
 	Label     uint      `json:"label"`
 }
 
@@ -262,7 +251,6 @@ func (s *OrganizationsService) Create(ctx context.Context, opt *OrganizationCrea
 		opt.VisibleTo,
 		opt.AddTime.FormatFull(),
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -270,7 +258,6 @@ func (s *OrganizationsService) Create(ctx context.Context, opt *OrganizationCrea
 	var record *OrganizationResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}

@@ -115,7 +115,6 @@ type PersonAddFollowerResponse struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Persons/get_persons
 func (s *PersonsService) List(ctx context.Context) (*PersonsRespose, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodGet, "/persons", nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -123,7 +122,6 @@ func (s *PersonsService) List(ctx context.Context) (*PersonsRespose, *Response, 
 	var record *PersonsRespose
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -141,7 +139,6 @@ func (s *PersonsService) AddFollower(ctx context.Context, id int, userID int) (*
 	}{
 		userID,
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -149,7 +146,6 @@ func (s *PersonsService) AddFollower(ctx context.Context, id int, userID int) (*
 	var record *PersonAddFollowerResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -166,7 +162,7 @@ type PersonCreateOptions struct {
 	Email     string    `json:"email"`
 	Phone     string    `json:"phone"`
 	VisibleTo VisibleTo `json:"visible_to"`
-	AddTime   Timestamp `json:"add_time"`
+	AddTime   string    `json:"add_time"`
 	Label     uint      `json:"label"`
 }
 
@@ -193,7 +189,6 @@ func (s *PersonsService) Create(ctx context.Context, opt *PersonCreateOptions) (
 		opt.VisibleTo,
 		opt.AddTime.FormatFull(),
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -201,7 +196,6 @@ func (s *PersonsService) Create(ctx context.Context, opt *PersonCreateOptions) (
 	var record *PersonResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -228,7 +222,6 @@ type PersonUpdateOptions struct {
 func (s *PersonsService) Update(ctx context.Context, id int, opt *PersonUpdateOptions) (*PersonResponse, *Response, error) {
 	uri := fmt.Sprintf("/persons/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -236,7 +229,6 @@ func (s *PersonsService) Update(ctx context.Context, id int, opt *PersonUpdateOp
 	var record *PersonResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -254,7 +246,6 @@ func (s *PersonsService) Merge(ctx context.Context, id int, mergeWithID int) (*P
 	}{
 		mergeWithID,
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -262,7 +253,6 @@ func (s *PersonsService) Merge(ctx context.Context, id int, mergeWithID int) (*P
 	var record *PersonResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -276,7 +266,6 @@ func (s *PersonsService) Merge(ctx context.Context, id int, mergeWithID int) (*P
 func (s *PersonsService) DeleteFollower(ctx context.Context, id int, followerID int) (*Response, error) {
 	uri := fmt.Sprintf("/persons/%v/followers/%v", id, followerID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -290,7 +279,6 @@ func (s *PersonsService) DeleteFollower(ctx context.Context, id int, followerID 
 func (s *PersonsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/persons/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -304,7 +292,6 @@ func (s *PersonsService) Delete(ctx context.Context, id int) (*Response, error) 
 func (s *PersonsService) DeletePicture(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/persons/%v/picture", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -319,7 +306,6 @@ func (s *PersonsService) DeleteMultiple(ctx context.Context, ids []int) (*Respon
 	req, err := s.client.NewRequest(http.MethodDelete, "/persons", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -332,7 +318,6 @@ func (s *PersonsService) DeleteMultiple(ctx context.Context, ids []int) (*Respon
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Persons/get_persons_id
 func (s *PersonsService) Get(ctx context.Context, personID int) (*PersonResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodGet, fmt.Sprintf("/persons/%d", personID), nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -340,7 +325,6 @@ func (s *PersonsService) Get(ctx context.Context, personID int) (*PersonResponse
 	var record *PersonResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}

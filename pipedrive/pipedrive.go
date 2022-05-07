@@ -91,7 +91,7 @@ type Config struct {
 type Rate struct {
 	Limit     int       `json:"limit"`
 	Remaining int       `json:"remaining"`
-	Reset     Timestamp `json:"reset"`
+	Reset     string `json:"reset"`
 }
 
 func (r Rate) String() string {

@@ -147,7 +147,6 @@ type DealResponse struct {
 func (s *DealService) ListUpdates(ctx context.Context, id int) (*DealsResponse, *Response, error) {
 	uri := fmt.Sprintf("/deals/%v/flow", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -155,7 +154,6 @@ func (s *DealService) ListUpdates(ctx context.Context, id int) (*DealsResponse, 
 	var record *DealsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -170,7 +168,6 @@ func (s *DealService) Find(ctx context.Context, term string) (*DealsResponse, *R
 	req, err := s.client.NewRequest(http.MethodGet, "/deals/find", &SearchOptions{
 		Term: term,
 	}, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -178,7 +175,6 @@ func (s *DealService) Find(ctx context.Context, term string) (*DealsResponse, *R
 	var record *DealsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -192,7 +188,6 @@ func (s *DealService) Find(ctx context.Context, term string) (*DealsResponse, *R
 func (s *DealService) GetByID(ctx context.Context, id int) (*DealResponse, *Response, error) {
 	uri := fmt.Sprintf("/deals/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -200,7 +195,6 @@ func (s *DealService) GetByID(ctx context.Context, id int) (*DealResponse, *Resp
 	var record *DealResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -226,7 +220,6 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 		}, nil)
 	} else {
 		req, err = s.client.NewRequest(http.MethodGet, "/deals", nil, nil)
-
 	}
 
 	if err != nil {
@@ -236,7 +229,6 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 	var record *DealsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -250,7 +242,6 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 func (s *DealService) Duplicate(ctx context.Context, id int) (*DealResponse, *Response, error) {
 	uri := fmt.Sprintf("/deals/%v/duplicate", id)
 	req, err := s.client.NewRequest(http.MethodPost, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -258,7 +249,6 @@ func (s *DealService) Duplicate(ctx context.Context, id int) (*DealResponse, *Re
 	var record *DealResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -278,7 +268,6 @@ type DealsMergeOptions struct {
 func (s *DealService) Merge(ctx context.Context, id int, opt *DealsMergeOptions) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v/merge", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, err
 	}
@@ -308,7 +297,6 @@ type DealsUpdateOptions struct {
 func (s *DealService) Update(ctx context.Context, id int, opt *DealsUpdateOptions) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, err
 	}
@@ -322,7 +310,6 @@ func (s *DealService) Update(ctx context.Context, id int, opt *DealsUpdateOption
 func (s *DealService) DeleteFollower(ctx context.Context, id int, followerID int) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v/followers/%v", id, followerID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -337,7 +324,6 @@ func (s *DealService) DeleteMultiple(ctx context.Context, ids []int) (*Response,
 	req, err := s.client.NewRequest(http.MethodDelete, "/deals", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -351,7 +337,6 @@ func (s *DealService) DeleteMultiple(ctx context.Context, ids []int) (*Response,
 func (s *DealService) DeleteParticipant(ctx context.Context, dealID int, participantID int) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v/participants/%v", dealID, participantID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -365,7 +350,6 @@ func (s *DealService) DeleteParticipant(ctx context.Context, dealID int, partici
 func (s *DealService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -379,7 +363,6 @@ func (s *DealService) Delete(ctx context.Context, id int) (*Response, error) {
 func (s *DealService) DeleteAttachedProduct(ctx context.Context, dealID int, productAttachmentID int) (*Response, error) {
 	uri := fmt.Sprintf("/deals/%v/products/%v", dealID, productAttachmentID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -400,10 +383,10 @@ type DealCreateOptions struct {
 	Status              string    `json:"status"`
 	Probability         uint      `json:"probability"`
 	LostReason          string    `json:"lost_reason"`
-	AddTime             Timestamp `json:"add_time"`
+	AddTime             string    `json:"add_time"`
 	VisibleTo           VisibleTo `json:"visible_to"`
 	RequirementAnalysis string    `json:"56d3d40c37c0db60fff576ae73ba2fea0d58dc09"`
-	WantedStartTime     Timestamp `json:"a3114acce61bb930180af173b395d76f42af8794"`
+	WantedStartTime     string    `json:"a3114acce61bb930180af173b395d76f42af8794"`
 	TemporaryLink       string    `json:"4fe88fad67d8dcbc17d18d9ee1faac55122249fd,omitempty"`
 	LeadSource          uint      `json:"5d4fbabc9b032aeb3df515d9c66994d6892ee062,omitempty"`
 }
@@ -447,7 +430,6 @@ func (s *DealService) Create(ctx context.Context, opt *DealCreateOptions) (*Deal
 		opt.TemporaryLink,
 		opt.LeadSource,
 	})
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -455,7 +437,6 @@ func (s *DealService) Create(ctx context.Context, opt *DealCreateOptions) (*Deal
 	var record *DealResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
