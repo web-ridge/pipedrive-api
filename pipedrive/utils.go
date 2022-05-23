@@ -1,7 +1,7 @@
 package pipedrive
 
 type PaginationParams struct {
-	Limit int
+	Limit int `url:"limit,omitempty"`
 }
 
 func PaginationOpts(limit int) PaginationParams {
