@@ -64,7 +64,7 @@ type ProductFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ProductFields/get_productFields
 func (s *ProductFieldsService) List(ctx context.Context) (*ProductFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/productFields", PaginationOpts(500)500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/productFields", PaginationOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

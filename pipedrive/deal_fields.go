@@ -67,7 +67,7 @@ type DealFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/DealFields/get_dealFields
 func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/dealFields", PaginationOpts(500)500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/dealFields", PaginationOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

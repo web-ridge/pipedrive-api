@@ -63,7 +63,7 @@ type OrganizationFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/OrganizationFields/get_organizationFields
 func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields", PaginationOpts(500)500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields", PaginationOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

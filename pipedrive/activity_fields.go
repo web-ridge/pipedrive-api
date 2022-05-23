@@ -46,7 +46,7 @@ type ActivityFieldsResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ActivityFields/get_activityFields
 func (s *ActivityFieldsService) List(ctx context.Context) (*ActivityFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/activityFields", PaginationOpts(500)500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/activityFields", PaginationOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

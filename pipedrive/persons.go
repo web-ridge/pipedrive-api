@@ -114,7 +114,7 @@ type PersonAddFollowerResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Persons/get_persons
 func (s *PersonsService) List(ctx context.Context) (*PersonsRespose, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/persons", PaginationOpts(500)500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/persons", PaginationOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}
