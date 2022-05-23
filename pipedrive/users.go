@@ -129,7 +129,7 @@ func (s *UsersService) ListFollowers(ctx context.Context, id int) (*UserFollower
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/get_users
 func (s *UsersService) List(ctx context.Context) (*UsersResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/users?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/users", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

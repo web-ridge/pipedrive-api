@@ -71,7 +71,7 @@ type FiltersListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Filters/get_filters
 func (s *FiltersService) List(ctx context.Context, opt *FiltersListOptions) (*FiltersResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/filters?limit=500", opt, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/filters", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

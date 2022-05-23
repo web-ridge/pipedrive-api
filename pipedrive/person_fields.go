@@ -61,7 +61,7 @@ type PersonFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/PersonFields/get_personFields
 func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/personFields?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/personFields", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

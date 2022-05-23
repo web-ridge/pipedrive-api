@@ -74,7 +74,7 @@ type ActivitiesReponse struct {
 //
 // https://developers.pipedrive.com/docs/api/v1/#!/Activities/get_activities
 func (s *ActivitiesService) List(ctx context.Context) (*ActivitiesReponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/activities?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/activities", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

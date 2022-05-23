@@ -50,7 +50,7 @@ type NoteResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Notes/get_notes
 func (s *NotesService) List(ctx context.Context) (*NotesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/notes?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/notes", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

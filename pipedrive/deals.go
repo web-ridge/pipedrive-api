@@ -214,12 +214,12 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 	var err error
 	var req *http.Request
 	if filterID > 0 {
-		req, err = s.client.NewRequest(http.MethodGet, "/deals?limit=500", &FilterOptions{
+		req, err = s.client.NewRequest(http.MethodGet, "/deals", &FilterOptions{
 			FilterID: filterID,
 			Status:   "all_not_deleted",
 		}, nil)
 	} else {
-		req, err = s.client.NewRequest(http.MethodGet, "/deals?limit=500", nil, nil)
+		req, err = s.client.NewRequest(http.MethodGet, "/deals", map[string]interface{}{"limit": 500}, nil)
 	}
 
 	if err != nil {

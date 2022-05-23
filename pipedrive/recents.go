@@ -66,7 +66,7 @@ type RecentsListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Recents/get_recents
 func (s *RecentsService) List(ctx context.Context, opt *RecentsListOptions) (*RecentsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/recents?limit=500", opt, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/recents", opt, nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -118,7 +118,7 @@ type PipelineDealsMovementResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Pipelines/get_pipelines
 func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/pipelines?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

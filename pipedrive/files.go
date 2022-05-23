@@ -71,7 +71,7 @@ type FilesResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/get_files
 func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/files?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/files", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

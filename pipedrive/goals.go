@@ -66,7 +66,7 @@ type GoalsListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Goals/get_goals
 func (s *GoalsService) List(ctx context.Context, opt *GoalsListOptions) (*GoalsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/goals?limit=500", opt, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/goals", opt, nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -95,7 +95,7 @@ func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*Produc
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products
 func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/products?limit=500", nil, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/products", map[string]interface{}{"limit": 500}, nil)
 	if err != nil {
 		return nil, nil, err
 	}
