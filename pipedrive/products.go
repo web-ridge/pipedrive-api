@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 // ProductsService handles pipelines related
@@ -96,7 +95,7 @@ func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*Produc
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products
 func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/products", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/products", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

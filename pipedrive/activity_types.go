@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 // ActivityTypesService handles activities related
@@ -48,7 +47,7 @@ type ActivityTypeResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ActivityTypes/get_activityTypes
 func (s *ActivityTypesService) List(ctx context.Context) (*ActivityTypesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/activityTypes", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/activityTypes", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

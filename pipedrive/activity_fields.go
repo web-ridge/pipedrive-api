@@ -3,7 +3,6 @@ package pipedrive
 import (
 	"context"
 	"net/http"
-	"net/url"
 )
 
 // ActivityFieldsService handles activity fields related
@@ -47,7 +46,7 @@ type ActivityFieldsResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ActivityFields/get_activityFields
 func (s *ActivityFieldsService) List(ctx context.Context) (*ActivityFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/activityFields", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/activityFields", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

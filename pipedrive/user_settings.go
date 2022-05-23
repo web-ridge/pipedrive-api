@@ -3,7 +3,6 @@ package pipedrive
 import (
 	"context"
 	"net/http"
-	"net/url"
 )
 
 // UserSettingsService handles user settings related
@@ -127,7 +126,7 @@ type UserSettings struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/UserSettings/get_userSettings
 func (s *UserSettingsService) List(ctx context.Context) (*UserSettings, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/userSettings", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/userSettings", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

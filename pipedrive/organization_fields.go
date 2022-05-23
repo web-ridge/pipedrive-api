@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 // OrganizationFieldsService handles organization fields related
@@ -64,7 +63,7 @@ type OrganizationFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/OrganizationFields/get_organizationFields
 func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

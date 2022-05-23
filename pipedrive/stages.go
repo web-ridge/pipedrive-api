@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 // StagesService handles stages related
@@ -61,7 +60,7 @@ type StagesListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Stages
 func (s *StagesService) List(ctx context.Context, opt *StagesListOptions) (*StagesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/stages", url.Values{"limit": []string{"500"}}, opt)
+	req, err := s.client.NewRequest(http.MethodGet, "/stages", LimitOpts(500), opt)
 	if err != nil {
 		return nil, nil, err
 	}

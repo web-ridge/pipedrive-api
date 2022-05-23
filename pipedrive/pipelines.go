@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 // PipelinesService handles pipelines related
@@ -119,7 +118,7 @@ type PipelineDealsMovementResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Pipelines/get_pipelines
 func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", url.Values{"limit": []string{"500"}}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", LimitOpts(500), nil)
 	if err != nil {
 		return nil, nil, err
 	}
