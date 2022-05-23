@@ -95,8 +95,7 @@ type AuthorizationsListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Authorizations/post_authorizations
 func (s *AuthorizationsService) List(ctx context.Context, opt *AuthorizationsListOptions) (*AuthorizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", nil, opt)
-
+	req, err := s.client.NewRequest(http.MethodPost, "/authorizations?limit=500", nil, opt)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -104,7 +103,6 @@ func (s *AuthorizationsService) List(ctx context.Context, opt *AuthorizationsLis
 	var record *AuthorizationsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}

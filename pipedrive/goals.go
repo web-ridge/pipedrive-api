@@ -66,8 +66,7 @@ type GoalsListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Goals/get_goals
 func (s *GoalsService) List(ctx context.Context, opt *GoalsListOptions) (*GoalsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/goals", opt, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/goals?limit=500", opt, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -75,7 +74,6 @@ func (s *GoalsService) List(ctx context.Context, opt *GoalsListOptions) (*GoalsR
 	var record *GoalsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -89,7 +87,6 @@ func (s *GoalsService) List(ctx context.Context, opt *GoalsListOptions) (*GoalsR
 func (s *GoalsService) GetByID(ctx context.Context, id int) (*GoalResponse, *Response, error) {
 	uri := fmt.Sprintf("/goals/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -97,7 +94,6 @@ func (s *GoalsService) GetByID(ctx context.Context, id int) (*GoalResponse, *Res
 	var record *GoalResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -123,7 +119,6 @@ type GoalCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Goals/post_goals
 func (s *GoalsService) Create(ctx context.Context, opt *GoalCreateOptions) (*GoalResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/goals", opt, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -131,7 +126,6 @@ func (s *GoalsService) Create(ctx context.Context, opt *GoalCreateOptions) (*Goa
 	var record *GoalResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -145,7 +139,6 @@ func (s *GoalsService) Create(ctx context.Context, opt *GoalCreateOptions) (*Goa
 func (s *GoalsService) Update(ctx context.Context, id int, opt *GoalCreateOptions) (*GoalResponse, *Response, error) {
 	uri := fmt.Sprintf("/goals/%v", id)
 	req, err := s.client.NewRequest(http.MethodPost, uri, opt, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -153,7 +146,6 @@ func (s *GoalsService) Update(ctx context.Context, id int, opt *GoalCreateOption
 	var record *GoalResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -174,7 +166,6 @@ type GoalGetResultsByIDOptions struct {
 func (s *GoalsService) GetResultsByID(ctx context.Context, id int, opt *GoalGetResultsByIDOptions) (*GoalsResponse, *Response, error) {
 	uri := fmt.Sprintf("/goals/%v/results", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, opt, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -182,7 +173,6 @@ func (s *GoalsService) GetResultsByID(ctx context.Context, id int, opt *GoalGetR
 	var record *GoalsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -196,7 +186,6 @@ func (s *GoalsService) GetResultsByID(ctx context.Context, id int, opt *GoalGetR
 func (s *GoalsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/goals/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

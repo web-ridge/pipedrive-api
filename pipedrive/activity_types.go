@@ -47,8 +47,7 @@ type ActivityTypeResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ActivityTypes/get_activityTypes
 func (s *ActivityTypesService) List(ctx context.Context) (*ActivityTypesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/activityTypes", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/activityTypes?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -56,7 +55,6 @@ func (s *ActivityTypesService) List(ctx context.Context) (*ActivityTypesResponse
 	var record *ActivityTypesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -77,7 +75,6 @@ type ActivityTypesAddOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ActivityTypes/post_activityTypes
 func (s *ActivityTypesService) Create(ctx context.Context, opt *ActivityTypesAddOptions) (*ActivityTypeResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/activityTypes", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -85,7 +82,6 @@ func (s *ActivityTypesService) Create(ctx context.Context, opt *ActivityTypesAdd
 	var record *ActivityTypeResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -108,7 +104,6 @@ type ActivityTypesEditOptions struct {
 func (s *ActivityTypesService) Update(ctx context.Context, id int, opt *ActivityTypesEditOptions) (*ActivityTypeResponse, *Response, error) {
 	uri := fmt.Sprintf("/activityTpes/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -116,7 +111,6 @@ func (s *ActivityTypesService) Update(ctx context.Context, id int, opt *Activity
 	var record *ActivityTypeResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -131,7 +125,6 @@ func (s *ActivityTypesService) DeleteMultiple(ctx context.Context, ids []int) (*
 	req, err := s.client.NewRequest(http.MethodDelete, "/activityTypes", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +138,6 @@ func (s *ActivityTypesService) DeleteMultiple(ctx context.Context, ids []int) (*
 func (s *ActivityTypesService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/activityTypes/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

@@ -45,8 +45,7 @@ type NoteFieldsResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/NoteFields/get_noteFields
 func (s *NoteFieldsService) List(ctx context.Context) (*NoteFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/noteFields", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/noteFields?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -54,7 +53,6 @@ func (s *NoteFieldsService) List(ctx context.Context) (*NoteFieldsResponse, *Res
 	var record *NoteFieldsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}

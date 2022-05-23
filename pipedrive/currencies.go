@@ -45,8 +45,7 @@ type CurrenciesListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Currencies/get_currencies
 func (s *CurrenciesService) List(ctx context.Context, opt *CurrenciesListOptions) (*CurrenciesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/currencies", opt, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/currencies?limit=500", opt, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -54,7 +53,6 @@ func (s *CurrenciesService) List(ctx context.Context, opt *CurrenciesListOptions
 	var record *CurrenciesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}

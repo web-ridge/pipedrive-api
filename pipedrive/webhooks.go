@@ -56,8 +56,7 @@ type WebhookResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Webhooks/get_webhooks
 func (s *WebhooksService) List(ctx context.Context) (*WebhooksResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/webhooks", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/webhooks?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -65,7 +64,6 @@ func (s *WebhooksService) List(ctx context.Context) (*WebhooksResponse, *Respons
 	var record *WebhooksResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -89,7 +87,6 @@ type WebhooksCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Webhooks/post_webhooks
 func (s *WebhooksService) Create(ctx context.Context, opt *WebhooksCreateOptions) (*WebhookResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/webhooks", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -97,7 +94,6 @@ func (s *WebhooksService) Create(ctx context.Context, opt *WebhooksCreateOptions
 	var record *WebhookResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -111,7 +107,6 @@ func (s *WebhooksService) Create(ctx context.Context, opt *WebhooksCreateOptions
 func (s *WebhooksService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/webhooks/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

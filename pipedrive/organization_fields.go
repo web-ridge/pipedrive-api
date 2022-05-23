@@ -63,8 +63,7 @@ type OrganizationFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/OrganizationFields/get_organizationFields
 func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/organizationFields?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -72,7 +71,6 @@ func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFiel
 	var record *OrganizationFieldsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -86,7 +84,6 @@ func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFiel
 func (s *OrganizationFieldsService) GetByID(ctx context.Context, id int) (*OrganizationFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/organizationFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -94,7 +91,6 @@ func (s *OrganizationFieldsService) GetByID(ctx context.Context, id int) (*Organ
 	var record *OrganizationFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -115,7 +111,6 @@ type OrganizationFieldCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/OrganizationFields/post_organizationFields
 func (s *OrganizationFieldsService) Create(ctx context.Context, opt *OrganizationFieldCreateOptions) (*OrganizationFieldResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/organizationFields", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -123,7 +118,6 @@ func (s *OrganizationFieldsService) Create(ctx context.Context, opt *Organizatio
 	var record *OrganizationFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -144,7 +138,6 @@ type OrganizationFieldUpdateOptions struct {
 func (s *OrganizationFieldsService) Update(ctx context.Context, id int, opt *OrganizationFieldUpdateOptions) (*OrganizationFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/organizationFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -152,7 +145,6 @@ func (s *OrganizationFieldsService) Update(ctx context.Context, id int, opt *Org
 	var record *OrganizationFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -167,7 +159,6 @@ func (s *OrganizationFieldsService) DeleteMultiple(ctx context.Context, ids []in
 	req, err := s.client.NewRequest(http.MethodDelete, "/organizationFields", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +172,6 @@ func (s *OrganizationFieldsService) DeleteMultiple(ctx context.Context, ids []in
 func (s *OrganizationFieldsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/organizationFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

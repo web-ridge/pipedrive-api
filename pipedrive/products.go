@@ -60,7 +60,7 @@ type ProductsResponse struct {
 // ProductResponse represents single product response.
 type ProductResponse struct {
 	Success        bool           `json:"success"`
-	Data           Product      `json:"data"`
+	Data           Product        `json:"data"`
 	AdditionalData AdditionalData `json:"additional_data,omitempty"`
 }
 
@@ -77,7 +77,6 @@ type ProductAttachedDealsResponse struct {
 func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*ProductAttachedDealsResponse, *Response, error) {
 	uri := fmt.Sprintf("/products/%v/deals", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -85,7 +84,6 @@ func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*Produc
 	var record *ProductAttachedDealsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -97,8 +95,7 @@ func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*Produc
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products
 func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/products", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/products?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -106,7 +103,6 @@ func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Respons
 	var record *ProductsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -127,7 +123,6 @@ func (s *ProductsService) Find(ctx context.Context, term string) (*ProductsRespo
 	req, err := s.client.NewRequest(http.MethodGet, "/products/find", &ProductFindOptions{
 		Term: term,
 	}, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -135,7 +130,6 @@ func (s *ProductsService) Find(ctx context.Context, term string) (*ProductsRespo
 	var record *ProductsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -149,7 +143,6 @@ func (s *ProductsService) Find(ctx context.Context, term string) (*ProductsRespo
 func (s *ProductsService) GetByID(ctx context.Context, id int) (*ProductResponse, *Response, error) {
 	uri := fmt.Sprintf("/products/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -157,7 +150,6 @@ func (s *ProductsService) GetByID(ctx context.Context, id int) (*ProductResponse
 	var record *ProductResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -183,7 +175,6 @@ type ProductCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Products/post_products
 func (s *ProductsService) Create(ctx context.Context, opt *ProductCreateOptions) (*ProductResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/products", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -191,7 +182,6 @@ func (s *ProductsService) Create(ctx context.Context, opt *ProductCreateOptions)
 	var record *ProductResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -218,7 +208,6 @@ type ProductUpdateOptions struct {
 func (s *ProductsService) Update(ctx context.Context, id int, opt *ProductUpdateOptions) (*ProductResponse, *Response, error) {
 	uri := fmt.Sprintf("/products/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -226,7 +215,6 @@ func (s *ProductsService) Update(ctx context.Context, id int, opt *ProductUpdate
 	var record *ProductResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -240,7 +228,6 @@ func (s *ProductsService) Update(ctx context.Context, id int, opt *ProductUpdate
 func (s *ProductsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/products/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -254,7 +241,6 @@ func (s *ProductsService) Delete(ctx context.Context, id int) (*Response, error)
 func (s *ProductsService) DeleteFollower(ctx context.Context, id int, followerID int) (*Response, error) {
 	uri := fmt.Sprintf("/products/%v/followers/%v", id, followerID)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

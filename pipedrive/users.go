@@ -111,7 +111,6 @@ type UserRoleSettingsResponse struct {
 func (s *UsersService) ListFollowers(ctx context.Context, id int) (*UserFollowersResponse, *Response, error) {
 	uri := fmt.Sprintf("/users/%v/followers", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -119,7 +118,6 @@ func (s *UsersService) ListFollowers(ctx context.Context, id int) (*UserFollower
 	var record *UserFollowersResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -131,8 +129,7 @@ func (s *UsersService) ListFollowers(ctx context.Context, id int) (*UserFollower
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/get_users
 func (s *UsersService) List(ctx context.Context) (*UsersResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/users", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/users?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -140,7 +137,6 @@ func (s *UsersService) List(ctx context.Context) (*UsersResponse, *Response, err
 	var record *UsersResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -161,7 +157,6 @@ type UserCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/post_users
 func (s *UsersService) Create(ctx context.Context, opt *UserCreateOptions) (*UserSingleResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/users", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -169,7 +164,6 @@ func (s *UsersService) Create(ctx context.Context, opt *UserCreateOptions) (*Use
 	var record *UserSingleResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -189,7 +183,6 @@ type UsersFindByNameOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/get_users_find
 func (s *UsersService) FindByName(ctx context.Context, opt *UsersFindByNameOptions) (*UsersResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodGet, "/users/find", opt, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -197,7 +190,6 @@ func (s *UsersService) FindByName(ctx context.Context, opt *UsersFindByNameOptio
 	var record *UsersResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -210,7 +202,6 @@ func (s *UsersService) FindByName(ctx context.Context, opt *UsersFindByNameOptio
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Users/get_users_me
 func (s *UsersService) GetCurrentUserData(ctx context.Context) (*UserSingleResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodGet, "/users/me", nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -218,7 +209,6 @@ func (s *UsersService) GetCurrentUserData(ctx context.Context) (*UserSingleRespo
 	var record *UserSingleResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -232,7 +222,6 @@ func (s *UsersService) GetCurrentUserData(ctx context.Context) (*UserSingleRespo
 func (s *UsersService) GetByID(ctx context.Context, id int) (*UserSingleResponse, *Response, error) {
 	uri := fmt.Sprintf("/users/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -240,7 +229,6 @@ func (s *UsersService) GetByID(ctx context.Context, id int) (*UserSingleResponse
 	var record *UserSingleResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -254,7 +242,6 @@ func (s *UsersService) GetByID(ctx context.Context, id int) (*UserSingleResponse
 func (s *UsersService) ListUserPermissions(ctx context.Context, id int) (*UserPermissionsResponse, *Response, error) {
 	uri := fmt.Sprintf("/users/%v/permissions", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -262,7 +249,6 @@ func (s *UsersService) ListUserPermissions(ctx context.Context, id int) (*UserPe
 	var record *UserPermissionsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -276,7 +262,6 @@ func (s *UsersService) ListUserPermissions(ctx context.Context, id int) (*UserPe
 func (s *UsersService) ListUserRoleSettings(ctx context.Context, id int) (*UserRoleSettingsResponse, *Response, error) {
 	uri := fmt.Sprintf("/users/%v/roleSettings", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -284,7 +269,6 @@ func (s *UsersService) ListUserRoleSettings(ctx context.Context, id int) (*UserR
 	var record *UserRoleSettingsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -304,13 +288,11 @@ type UsersUpdateUserDetailsOptions struct {
 func (s *UsersService) UpdateUserDetails(ctx context.Context, id int, opt *UsersUpdateUserDetailsOptions) (*Response, error) {
 	uri := fmt.Sprintf("/users/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, opt, nil)
-
 	if err != nil {
 		return nil, err
 	}
 
 	resp, err := s.client.Do(ctx, req, nil)
-
 	if err != nil {
 		return resp, err
 	}
@@ -330,13 +312,11 @@ type DeletePermissionSetAssignmentOptions struct {
 func (s *UsersService) DeletePermissionSetAssignment(ctx context.Context, id int, opt *DeletePermissionSetAssignmentOptions) (*Response, error) {
 	uri := fmt.Sprintf("/users/%v/permissionSetAssignments", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, opt, nil)
-
 	if err != nil {
 		return nil, err
 	}
 
 	resp, err := s.client.Do(ctx, req, nil)
-
 	if err != nil {
 		return resp, err
 	}
@@ -356,13 +336,11 @@ type DeleteRoleAssignmentOptions struct {
 func (s *UsersService) DeleteRoleAssignment(ctx context.Context, id int, opt *DeleteRoleAssignmentOptions) (*Response, error) {
 	uri := fmt.Sprintf("/users/%v/roleAssignments", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, opt, nil)
-
 	if err != nil {
 		return nil, err
 	}
 
 	resp, err := s.client.Do(ctx, req, nil)
-
 	if err != nil {
 		return resp, err
 	}

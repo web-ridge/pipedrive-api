@@ -60,8 +60,7 @@ type StagesListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Stages
 func (s *StagesService) List(ctx context.Context, opt *StagesListOptions) (*StagesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/stages", nil, opt)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/stages?limit=500", nil, opt)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -69,7 +68,6 @@ func (s *StagesService) List(ctx context.Context, opt *StagesListOptions) (*Stag
 	var record *StagesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -82,7 +80,6 @@ func (s *StagesService) List(ctx context.Context, opt *StagesListOptions) (*Stag
 func (s *StagesService) GetByID(ctx context.Context, id int) (*StageResponse, *Response, error) {
 	uri := fmt.Sprintf("/stages/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -90,7 +87,6 @@ func (s *StagesService) GetByID(ctx context.Context, id int) (*StageResponse, *R
 	var record *StageResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -114,7 +110,6 @@ type StagesGetDealsInStageOptions struct {
 func (s *StagesService) GetDealsInStage(ctx context.Context, id int, opt *StagesGetDealsInStageOptions) (*StageDealsResponse, *Response, error) {
 	uri := fmt.Sprintf("/stages/%v/deals", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -122,7 +117,6 @@ func (s *StagesService) GetDealsInStage(ctx context.Context, id int, opt *Stages
 	var record *StageDealsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -145,7 +139,6 @@ type StagesCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Stages/post_stages
 func (s *StagesService) Create(ctx context.Context, opt *StagesCreateOptions) (*StageResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/stages", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -153,7 +146,6 @@ func (s *StagesService) Create(ctx context.Context, opt *StagesCreateOptions) (*
 	var record *StageResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -178,7 +170,6 @@ type StagesUpdateOptions struct {
 func (s *StagesService) Update(ctx context.Context, id int, opt *StagesUpdateOptions) (*StageResponse, *Response, error) {
 	uri := fmt.Sprintf("/stages/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -186,7 +177,6 @@ func (s *StagesService) Update(ctx context.Context, id int, opt *StagesUpdateOpt
 	var record *StageResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -201,7 +191,6 @@ func (s *StagesService) DeleteMultiple(ctx context.Context, ids []int) (*Respons
 	req, err := s.client.NewRequest(http.MethodDelete, "/stages", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -215,7 +204,6 @@ func (s *StagesService) DeleteMultiple(ctx context.Context, ids []int) (*Respons
 func (s *StagesService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/stages/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

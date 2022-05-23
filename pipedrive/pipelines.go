@@ -118,8 +118,7 @@ type PipelineDealsMovementResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Pipelines/get_pipelines
 func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/pipelines?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -127,7 +126,6 @@ func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Respo
 	var record *PipelinesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -141,7 +139,6 @@ func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Respo
 func (s *PipelinesService) GetByID(ctx context.Context, id int) (*PipelineResponse, *Response, error) {
 	uri := fmt.Sprintf("/pipelines/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -149,7 +146,6 @@ func (s *PipelinesService) GetByID(ctx context.Context, id int) (*PipelineRespon
 	var record *PipelineResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -163,7 +159,6 @@ func (s *PipelinesService) GetByID(ctx context.Context, id int) (*PipelineRespon
 func (s *PipelinesService) GetDeals(ctx context.Context, id int) (*PipelinesResponse, *Response, error) {
 	uri := fmt.Sprintf("/pipelines/%v/deals", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -171,7 +166,6 @@ func (s *PipelinesService) GetDeals(ctx context.Context, id int) (*PipelinesResp
 	var record *PipelinesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -191,7 +185,6 @@ func (s *PipelinesService) GetDealsConversionRate(ctx context.Context, id int, s
 		startDate.Format(),
 		endDate.Format(),
 	}, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -199,7 +192,6 @@ func (s *PipelinesService) GetDealsConversionRate(ctx context.Context, id int, s
 	var record *PipelineDealsConversionRateResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -219,7 +211,6 @@ func (s *PipelinesService) GetDealsMovement(ctx context.Context, id int, startDa
 		startDate.Format(),
 		endDate.Format(),
 	}, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -227,7 +218,6 @@ func (s *PipelinesService) GetDealsMovement(ctx context.Context, id int, startDa
 	var record *PipelineDealsMovementResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -249,7 +239,6 @@ type PipelineCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Pipelines/post_pipelines
 func (s *PipelinesService) Create(ctx context.Context, opt *PipelineCreateOptions) (*PipelineResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/pipelines", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -257,7 +246,6 @@ func (s *PipelinesService) Create(ctx context.Context, opt *PipelineCreateOption
 	var record *PipelineResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -280,7 +268,6 @@ type PipelineUpdateOptions struct {
 func (s *PipelinesService) Update(ctx context.Context, id int, opt *PipelineUpdateOptions) (*PipelineResponse, *Response, error) {
 	uri := fmt.Sprintf("/pipelines/%v", id)
 	req, err := s.client.NewRequest(http.MethodPost, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -288,7 +275,6 @@ func (s *PipelinesService) Update(ctx context.Context, id int, opt *PipelineUpda
 	var record *PipelineResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -302,7 +288,6 @@ func (s *PipelinesService) Update(ctx context.Context, id int, opt *PipelineUpda
 func (s *PipelinesService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/pipelines/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

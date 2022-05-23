@@ -71,8 +71,7 @@ type FiltersListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Filters/get_filters
 func (s *FiltersService) List(ctx context.Context, opt *FiltersListOptions) (*FiltersResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/filters", opt, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/filters?limit=500", opt, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -80,7 +79,6 @@ func (s *FiltersService) List(ctx context.Context, opt *FiltersListOptions) (*Fi
 	var record *FiltersResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -94,7 +92,6 @@ func (s *FiltersService) List(ctx context.Context, opt *FiltersListOptions) (*Fi
 func (s *FiltersService) GetByID(ctx context.Context, id int) (*FilterResponse, *Response, error) {
 	uri := fmt.Sprintf("/filters/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -102,7 +99,6 @@ func (s *FiltersService) GetByID(ctx context.Context, id int) (*FilterResponse, 
 	var record *FilterResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -123,7 +119,6 @@ type FilterCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Filters/post_filters
 func (s *FiltersService) Create(ctx context.Context, opt *FilterCreateOptions) (*FilterResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/filters", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -131,7 +126,6 @@ func (s *FiltersService) Create(ctx context.Context, opt *FilterCreateOptions) (
 	var record *FilterResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -152,7 +146,6 @@ type FilterUpdateOptions struct {
 func (s *FiltersService) Update(ctx context.Context, id int, opt *FilterUpdateOptions) (*FilterResponse, *Response, error) {
 	uri := fmt.Sprintf("/filters/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -160,7 +153,6 @@ func (s *FiltersService) Update(ctx context.Context, id int, opt *FilterUpdateOp
 	var record *FilterResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -175,7 +167,6 @@ func (s *FiltersService) DeleteMultiple(ctx context.Context, ids []int) (*Respon
 	req, err := s.client.NewRequest(http.MethodDelete, "/filter", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -189,7 +180,6 @@ func (s *FiltersService) DeleteMultiple(ctx context.Context, ids []int) (*Respon
 func (s *FiltersService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/filters/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

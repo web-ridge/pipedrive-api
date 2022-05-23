@@ -67,8 +67,7 @@ type DealFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/DealFields/get_dealFields
 func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/dealFields", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/dealFields?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -76,7 +75,6 @@ func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Res
 	var record *DealFieldsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -90,7 +88,6 @@ func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Res
 func (s *DealFieldsService) GetByID(ctx context.Context, id int) (*DealFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/dealFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -98,7 +95,6 @@ func (s *DealFieldsService) GetByID(ctx context.Context, id int) (*DealFieldResp
 	var record *DealFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -119,7 +115,6 @@ type DealFieldCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/DealFields/post_dealFields
 func (s *DealFieldsService) Create(ctx context.Context, opt *DealFieldCreateOptions) (*DealFieldResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/dealFields", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -127,7 +122,6 @@ func (s *DealFieldsService) Create(ctx context.Context, opt *DealFieldCreateOpti
 	var record *DealFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -148,7 +142,6 @@ type DealFieldUpdateOptions struct {
 func (s *DealFieldsService) Update(ctx context.Context, id int, opt *DealFieldUpdateOptions) (*ProductFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/dealFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -156,7 +149,6 @@ func (s *DealFieldsService) Update(ctx context.Context, id int, opt *DealFieldUp
 	var record *ProductFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -171,7 +163,6 @@ func (s *DealFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*Res
 	req, err := s.client.NewRequest(http.MethodDelete, "/dealFields", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -185,7 +176,6 @@ func (s *DealFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*Res
 func (s *DealFieldsService) Delete(ctx context.Context, id uint) (*Response, error) {
 	uri := fmt.Sprintf("/dealFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

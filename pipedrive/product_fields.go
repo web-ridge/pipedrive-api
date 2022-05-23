@@ -64,8 +64,7 @@ type ProductFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ProductFields/get_productFields
 func (s *ProductFieldsService) List(ctx context.Context) (*ProductFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/productFields", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/productFields?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -73,7 +72,6 @@ func (s *ProductFieldsService) List(ctx context.Context) (*ProductFieldsResponse
 	var record *ProductFieldsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -87,7 +85,6 @@ func (s *ProductFieldsService) List(ctx context.Context) (*ProductFieldsResponse
 func (s *ProductFieldsService) GetByID(ctx context.Context, id int) (*ProductFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/productFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -95,7 +92,6 @@ func (s *ProductFieldsService) GetByID(ctx context.Context, id int) (*ProductFie
 	var record *ProductFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -116,7 +112,6 @@ type ProductFieldCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ProductFields/post_productFields
 func (s *ProductFieldsService) Create(ctx context.Context, opt *ProductFieldCreateOptions) (*ProductFieldResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/productFields", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -124,7 +119,6 @@ func (s *ProductFieldsService) Create(ctx context.Context, opt *ProductFieldCrea
 	var record *ProductFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -145,7 +139,6 @@ type ProductFieldUpdateOptions struct {
 func (s *ProductFieldsService) Update(ctx context.Context, id int, opt *ProductFieldUpdateOptions) (*ProductFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/productFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -153,7 +146,6 @@ func (s *ProductFieldsService) Update(ctx context.Context, id int, opt *ProductF
 	var record *ProductFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -168,7 +160,6 @@ func (s *ProductFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*
 	req, err := s.client.NewRequest(http.MethodDelete, "/productFields", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -182,7 +173,6 @@ func (s *ProductFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*
 func (s *ProductFieldsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/productFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

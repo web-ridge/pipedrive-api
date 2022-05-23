@@ -61,8 +61,7 @@ type PersonFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/PersonFields/get_personFields
 func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/personFields", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/personFields?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -70,7 +69,6 @@ func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, 
 	var record *PersonFieldsResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -84,7 +82,6 @@ func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, 
 func (s *PersonFieldsService) GetByID(ctx context.Context, id int) (*PersonFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/personFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -92,7 +89,6 @@ func (s *PersonFieldsService) GetByID(ctx context.Context, id int) (*PersonField
 	var record *PersonFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -113,7 +109,6 @@ type PersonFieldCreateOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/ProductFields/post_productFields
 func (s *PersonFieldsService) Create(ctx context.Context, opt *PersonFieldCreateOptions) (*ProductFieldResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/personFields", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -121,7 +116,6 @@ func (s *PersonFieldsService) Create(ctx context.Context, opt *PersonFieldCreate
 	var record *ProductFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -142,7 +136,6 @@ type PersonFieldUpdateOptions struct {
 func (s *PersonFieldsService) Update(ctx context.Context, id int, opt *PersonFieldUpdateOptions) (*PersonFieldResponse, *Response, error) {
 	uri := fmt.Sprintf("/personFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -150,7 +143,6 @@ func (s *PersonFieldsService) Update(ctx context.Context, id int, opt *PersonFie
 	var record *PersonFieldResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -165,7 +157,6 @@ func (s *PersonFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*R
 	req, err := s.client.NewRequest(http.MethodDelete, "/personFields", &DeleteMultipleOptions{
 		Ids: arrayToString(ids, ","),
 	}, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +170,6 @@ func (s *PersonFieldsService) DeleteMultiple(ctx context.Context, ids []int) (*R
 func (s *PersonFieldsService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/personFields/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

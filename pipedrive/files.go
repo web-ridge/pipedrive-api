@@ -71,8 +71,7 @@ type FilesResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/get_files
 func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/files", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/files?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -80,7 +79,6 @@ func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, err
 	var record *FilesResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -94,7 +92,6 @@ func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, err
 func (s *FilesService) GetByID(ctx context.Context, id int) (*FileResponse, *Response, error) {
 	uri := fmt.Sprintf("/files/%v", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -102,7 +99,6 @@ func (s *FilesService) GetByID(ctx context.Context, id int) (*FileResponse, *Res
 	var record *FileResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -116,7 +112,6 @@ func (s *FilesService) GetByID(ctx context.Context, id int) (*FileResponse, *Res
 func (s *FilesService) GetDownloadLinkByID(id int) (string, *http.Request, error) {
 	uri := fmt.Sprintf("/files/%v/download", id)
 	req, err := s.client.NewRequest(http.MethodGet, uri, nil, nil)
-
 	if err != nil {
 		return "", nil, err
 	}
@@ -129,7 +124,6 @@ func (s *FilesService) GetDownloadLinkByID(id int) (string, *http.Request, error
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/post_files
 func (s *FilesService) Upload(ctx context.Context, fileName string, filePath string) (*FileResponse, *Response, error) {
 	file, err := os.Open(filePath)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -137,13 +131,11 @@ func (s *FilesService) Upload(ctx context.Context, fileName string, filePath str
 	defer file.Close()
 
 	fileContents, err := ioutil.ReadAll(file)
-
 	if err != nil {
 		return nil, nil, err
 	}
 
 	fileInfo, err := file.Stat()
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -151,7 +143,6 @@ func (s *FilesService) Upload(ctx context.Context, fileName string, filePath str
 	var body *bytes.Buffer
 	writer := multipart.NewWriter(body)
 	part, err := writer.CreateFormFile(fileName, fileInfo.Name())
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -165,7 +156,6 @@ func (s *FilesService) Upload(ctx context.Context, fileName string, filePath str
 	}
 
 	req, err := s.client.NewRequest(http.MethodPost, "/files", nil, body)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -173,7 +163,6 @@ func (s *FilesService) Upload(ctx context.Context, fileName string, filePath str
 	var record *FileResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -196,7 +185,6 @@ type CreateRemoteLinkedFileOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/post_files_remote
 func (s *FilesService) CreateRemoteLinkedFile(ctx context.Context, opt *CreateRemoteLinkedFileOptions) (*FileResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/files/remote", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -204,7 +192,6 @@ func (s *FilesService) CreateRemoteLinkedFile(ctx context.Context, opt *CreateRe
 	var record *FileResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -226,7 +213,6 @@ type LinkRemoteFileToItemOptions struct {
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/post_files_remoteLink
 func (s *FilesService) LinkRemoteFileToItem(ctx context.Context, opt *LinkRemoteFileToItemOptions) (*FileResponse, *Response, error) {
 	req, err := s.client.NewRequest(http.MethodPost, "/files/remoteLink", nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -234,7 +220,6 @@ func (s *FilesService) LinkRemoteFileToItem(ctx context.Context, opt *LinkRemote
 	var record *FileResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -255,7 +240,6 @@ type UpdateFileDetailsOptions struct {
 func (s *FilesService) Update(ctx context.Context, id int, opt *UpdateFileDetailsOptions) (*FileResponse, *Response, error) {
 	uri := fmt.Sprintf("/files/%v", id)
 	req, err := s.client.NewRequest(http.MethodPut, uri, nil, opt)
-
 	if err != nil {
 		return nil, nil, err
 	}
@@ -263,7 +247,6 @@ func (s *FilesService) Update(ctx context.Context, id int, opt *UpdateFileDetail
 	var record *FileResponse
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
@@ -277,7 +260,6 @@ func (s *FilesService) Update(ctx context.Context, id int, opt *UpdateFileDetail
 func (s *FilesService) Delete(ctx context.Context, id int) (*Response, error) {
 	uri := fmt.Sprintf("/files/%v", id)
 	req, err := s.client.NewRequest(http.MethodDelete, uri, nil, nil)
-
 	if err != nil {
 		return nil, err
 	}

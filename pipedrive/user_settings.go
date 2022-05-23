@@ -126,8 +126,7 @@ type UserSettings struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/UserSettings/get_userSettings
 func (s *UserSettingsService) List(ctx context.Context) (*UserSettings, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/userSettings", nil, nil)
-
+	req, err := s.client.NewRequest(http.MethodGet, "/userSettings?limit=500", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -135,7 +134,6 @@ func (s *UserSettingsService) List(ctx context.Context) (*UserSettings, *Respons
 	var record *UserSettings
 
 	resp, err := s.client.Do(ctx, req, &record)
-
 	if err != nil {
 		return nil, resp, err
 	}
