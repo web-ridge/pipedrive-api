@@ -115,7 +115,7 @@ func (s *AuthorizationsService) List(ctx context.Context) (*AuthorizationsRespon
 }
 
 func (s *AuthorizationsService) listInner(ctx context.Context, start int) (*AuthorizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", PaginationOpts(start), opt)
+	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", PaginationOpts(start), nil)
 	if err != nil {
 		return nil, nil, err
 	}
