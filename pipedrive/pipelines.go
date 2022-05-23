@@ -118,7 +118,27 @@ type PipelineDealsMovementResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Pipelines/get_pipelines
 func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", PaginationOpts(500), nil)
+	r, rsp, err := s.listInner(ctx, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+	data := r.Data
+
+	i := 1
+	for r.AdditionalData.Pagination.MoreItemsInCollection {
+		r, _, err = s.listInner(ctx, i*500)
+		if err != nil {
+			return nil, nil, err
+		}
+		data = append(data, r.Data...)
+	}
+
+	r.Data = data
+	return r, rsp, err
+}
+
+func (s *PipelinesService) listInner(ctx context.Context, start int) (*PipelinesResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodGet, "/pipelines", PaginationOpts(start), nil)
 	if err != nil {
 		return nil, nil, err
 	}

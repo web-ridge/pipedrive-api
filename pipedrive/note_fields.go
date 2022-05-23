@@ -44,8 +44,8 @@ type NoteFieldsResponse struct {
 // List returns all fields for note.
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/NoteFields/get_noteFields
-func (s *NoteFieldsService) List(ctx context.Context) (*NoteFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/noteFields", PaginationOpts(500), nil)
+func (s *NoteFieldsService) List(ctx context.Context, start int) (*NoteFieldsResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodGet, "/noteFields", PaginationOpts(start), nil)
 	if err != nil {
 		return nil, nil, err
 	}

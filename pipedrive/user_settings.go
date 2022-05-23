@@ -126,7 +126,8 @@ type UserSettings struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/UserSettings/get_userSettings
 func (s *UserSettingsService) List(ctx context.Context) (*UserSettings, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/userSettings", PaginationOpts(500), nil)
+	// no pagination here
+	req, err := s.client.NewRequest(http.MethodGet, "/userSettings", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -59,8 +59,8 @@ type StagesListOptions struct {
 // List returns data about all stages.
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Stages
-func (s *StagesService) List(ctx context.Context, opt *StagesListOptions) (*StagesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/stages", PaginationOpts(500), opt)
+func (s *StagesService) List(ctx context.Context) (*StagesResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodGet, "/stages", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

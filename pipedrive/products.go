@@ -95,7 +95,27 @@ func (s *ProductsService) GetAttachedDeals(ctx context.Context, id int) (*Produc
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Products/get_products
 func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/products", PaginationOpts(500), nil)
+	r, rsp, err := s.listInner(ctx, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+	data := r.Data
+
+	i := 1
+	for r.AdditionalData.Pagination.MoreItemsInCollection {
+		r, _, err = s.listInner(ctx, i*500)
+		if err != nil {
+			return nil, nil, err
+		}
+		data = append(data, r.Data...)
+	}
+
+	r.Data = data
+	return r, rsp, err
+}
+
+func (s *ProductsService) listInner(ctx context.Context, start int) (*ProductsResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodGet, "/products", PaginationOpts(start), nil)
 	if err != nil {
 		return nil, nil, err
 	}

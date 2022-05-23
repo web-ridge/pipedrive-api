@@ -116,7 +116,27 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*Organizati
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Organizations/get_organizations
 func (s *OrganizationsService) List(ctx context.Context) (*OrganizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/organizations", PaginationOpts(500), nil)
+	r, rsp, err := s.listInner(ctx, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+	data := r.Data
+
+	i := 1
+	for r.AdditionalData.Pagination.MoreItemsInCollection {
+		r, _, err = s.listInner(ctx, i*500)
+		if err != nil {
+			return nil, nil, err
+		}
+		data = append(data, r.Data...)
+	}
+
+	r.Data = data
+	return r, rsp, err
+}
+
+func (s *OrganizationsService) listInner(ctx context.Context, start int) (*OrganizationsResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodGet, "/organizations", PaginationOpts(start), nil)
 	if err != nil {
 		return nil, nil, err
 	}

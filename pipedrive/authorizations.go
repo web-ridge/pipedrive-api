@@ -94,8 +94,28 @@ type AuthorizationsListOptions struct {
 // List returns all authorizations for a particular user.
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Authorizations/post_authorizations
-func (s *AuthorizationsService) List(ctx context.Context, opt *AuthorizationsListOptions) (*AuthorizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", PaginationOpts(500), opt)
+func (s *AuthorizationsService) List(ctx context.Context) (*AuthorizationsResponse, *Response, error) {
+	r, rsp, err := s.listInner(ctx, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+	data := r.Data
+
+	i := 1
+	for r.AdditionalData.Pagination.MoreItemsInCollection {
+		r, _, err = s.listInner(ctx, i*500)
+		if err != nil {
+			return nil, nil, err
+		}
+		data = append(data, r.Data...)
+	}
+
+	r.Data = data
+	return r, rsp, err
+}
+
+func (s *AuthorizationsService) listInner(ctx context.Context, start int) (*AuthorizationsResponse, *Response, error) {
+	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", PaginationOpts(start), opt)
 	if err != nil {
 		return nil, nil, err
 	}
