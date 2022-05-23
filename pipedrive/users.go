@@ -142,6 +142,7 @@ func (s *UsersService) List(ctx context.Context) (*UsersResponse, *Response, err
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

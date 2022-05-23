@@ -77,6 +77,7 @@ func (s *ProductFieldsService) List(ctx context.Context) (*ProductFieldsResponse
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

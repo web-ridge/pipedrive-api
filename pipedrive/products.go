@@ -108,6 +108,7 @@ func (s *ProductsService) List(ctx context.Context) (*ProductsResponse, *Respons
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

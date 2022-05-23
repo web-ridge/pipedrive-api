@@ -80,6 +80,7 @@ func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Res
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

@@ -74,6 +74,7 @@ func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, 
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

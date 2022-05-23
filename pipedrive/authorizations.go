@@ -108,6 +108,7 @@ func (s *AuthorizationsService) List(ctx context.Context) (*AuthorizationsRespon
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

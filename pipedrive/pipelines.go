@@ -131,6 +131,7 @@ func (s *PipelinesService) List(ctx context.Context) (*PipelinesResponse, *Respo
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

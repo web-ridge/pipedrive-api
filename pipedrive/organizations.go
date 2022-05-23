@@ -129,8 +129,8 @@ func (s *OrganizationsService) List(ctx context.Context) (*OrganizationsResponse
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
-
 	r.Data = data
 	return r, rsp, err
 }

@@ -76,6 +76,7 @@ func (s *OrganizationFieldsService) List(ctx context.Context) (*OrganizationFiel
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

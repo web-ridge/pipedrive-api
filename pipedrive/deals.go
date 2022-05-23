@@ -224,6 +224,7 @@ func (s *DealService) List(ctx context.Context) (*DealsResponse, *Response, erro
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

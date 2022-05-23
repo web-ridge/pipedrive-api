@@ -63,6 +63,7 @@ func (s *NotesService) List(ctx context.Context) (*NotesResponse, *Response, err
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data

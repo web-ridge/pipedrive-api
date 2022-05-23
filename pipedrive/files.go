@@ -84,6 +84,7 @@ func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, err
 			return nil, nil, err
 		}
 		data = append(data, r.Data...)
+		i++
 	}
 
 	r.Data = data
