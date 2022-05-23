@@ -219,7 +219,7 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 			Status:   "all_not_deleted",
 		}, nil)
 	} else {
-		req, err = s.client.NewRequest(http.MethodGet, "/deals", LimitOpts(500), nil)
+		req, err = s.client.NewRequest(http.MethodGet, "/deals", PaginationOpts(500)500), nil)
 	}
 
 	if err != nil {

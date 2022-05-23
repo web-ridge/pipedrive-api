@@ -23,7 +23,7 @@ type UserConnections struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/UserConnections/get_userConnections
 func (s *UserConnectionsService) List(ctx context.Context) (*UserConnections, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/userConnections", LimitOpts(500), nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/userConnections", PaginationOpts(500)500), nil)
 	if err != nil {
 		return nil, nil, err
 	}

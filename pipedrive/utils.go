@@ -1,12 +1,11 @@
 package pipedrive
 
-import (
-	"fmt"
-	"net/url"
-)
+type PaginationParams struct {
+	Limit int
+}
 
-func LimitOpts(limit int) url.Values {
-	v := url.Values{}
-	v.Set("limit", fmt.Sprintf("%v", limit))
-	return v
+func PaginationOpts(limit int) PaginationParams {
+	return PaginationParams{
+		Limit: limit,
+	}
 }
