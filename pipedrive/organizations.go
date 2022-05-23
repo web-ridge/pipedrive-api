@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // OrganizationsService handles organization related
@@ -116,7 +117,7 @@ func (s *OrganizationsService) GetByID(ctx context.Context, id int) (*Organizati
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Organizations/get_organizations
 func (s *OrganizationsService) List(ctx context.Context) (*OrganizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/organizations", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/organizations", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

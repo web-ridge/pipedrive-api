@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // PersonsService handles activities related
@@ -114,7 +115,7 @@ type PersonAddFollowerResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Persons/get_persons
 func (s *PersonsService) List(ctx context.Context) (*PersonsRespose, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/persons", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/persons", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

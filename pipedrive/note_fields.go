@@ -3,6 +3,7 @@ package pipedrive
 import (
 	"context"
 	"net/http"
+	"net/url"
 )
 
 // NoteFieldsService handles note field related
@@ -45,7 +46,7 @@ type NoteFieldsResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/NoteFields/get_noteFields
 func (s *NoteFieldsService) List(ctx context.Context) (*NoteFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/noteFields", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/noteFields", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

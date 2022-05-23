@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
+	"net/url"
 	"os"
 )
 
@@ -71,7 +72,7 @@ type FilesResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Files/get_files
 func (s *FilesService) List(ctx context.Context) (*FilesResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/files", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/files", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

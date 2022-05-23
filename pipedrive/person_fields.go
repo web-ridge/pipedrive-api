@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // PersonFieldsService handles person fields related
@@ -61,7 +62,7 @@ type PersonFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/PersonFields/get_personFields
 func (s *PersonFieldsService) List(ctx context.Context) (*PersonFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/personFields", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/personFields", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

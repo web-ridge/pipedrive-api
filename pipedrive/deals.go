@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // DealService handles deals related
@@ -219,7 +220,7 @@ func (s *DealService) List(ctx context.Context, filterID int) (*DealsResponse, *
 			Status:   "all_not_deleted",
 		}, nil)
 	} else {
-		req, err = s.client.NewRequest(http.MethodGet, "/deals", map[string]interface{}{"limit": 500}, nil)
+		req, err = s.client.NewRequest(http.MethodGet, "/deals", url.Values{"limit": []string{"500"}}, nil)
 	}
 
 	if err != nil {

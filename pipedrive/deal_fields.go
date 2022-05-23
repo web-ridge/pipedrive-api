@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // DealFieldsService handles deal fields related
@@ -67,7 +68,7 @@ type DealFieldResponse struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/DealFields/get_dealFields
 func (s *DealFieldsService) List(ctx context.Context) (*DealFieldsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodGet, "/dealFields", map[string]interface{}{"limit": 500}, nil)
+	req, err := s.client.NewRequest(http.MethodGet, "/dealFields", url.Values{"limit": []string{"500"}}, nil)
 	if err != nil {
 		return nil, nil, err
 	}

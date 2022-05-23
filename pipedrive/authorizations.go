@@ -3,6 +3,7 @@ package pipedrive
 import (
 	"context"
 	"net/http"
+	"net/url"
 )
 
 // AuthorizationsService handles authorization related
@@ -95,7 +96,7 @@ type AuthorizationsListOptions struct {
 //
 // Pipedrive API docs: https://developers.pipedrive.com/docs/api/v1/#!/Authorizations/post_authorizations
 func (s *AuthorizationsService) List(ctx context.Context, opt *AuthorizationsListOptions) (*AuthorizationsResponse, *Response, error) {
-	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", map[string]interface{}{"limit": 500}, opt)
+	req, err := s.client.NewRequest(http.MethodPost, "/authorizations", url.Values{"limit": []string{"500"}}, opt)
 	if err != nil {
 		return nil, nil, err
 	}
